@@ -15,7 +15,9 @@ datasource db {
 }
 
 model Rocket {
-  id          Int      @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String
   status      String
+  launch      String
+  destination String
 }
