@@ -15,10 +15,13 @@ export class RocketsServices{
         return this.prisma.rocket.create({data:createRocketDto})
     }
 
-    async findOne(id:number){
-        return this.prisma.rocket.findUnique
-        where:{id}
-    }
+  async findOne(id: number) {
+    return this.prisma.rocket.findUnique({
+        where: {
+            id,
+        },
+    });
+}
      async update(id: number, updateRocketDto: CreateRocketsDto) {
         return this.prisma.rocket.update({
             where: { id },
