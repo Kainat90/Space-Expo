@@ -1,98 +1,180 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# SpaceExpo Launch Control API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Overview
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+SpaceExpo Launch Control is a simple RESTful CRUD API built with NestJS, Prisma, and MySQL for managing rockets and their mission information. The API allows users to create, retrieve, update, and delete rocket records while providing interactive API documentation through Swagger.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+* Create new rockets
+* Retrieve all rockets
+* Retrieve a rocket by ID
+* Update existing rockets
+* Delete rockets
+* Swagger API documentation
+* MySQL database integration using Prisma ORM
 
-```bash
-$ npm install
+---
+
+## Technology Stack
+
+* NestJS
+* Prisma ORM
+* MySQL
+* TypeScript
+* Swagger (OpenAPI)
+
+---
+
+## Project Structure
+
+```text
+src/
+├── rockets/
+│   ├── rockets.controller.ts
+│   ├── rockets.service.ts
+│   ├── rockets.module.ts
+│   └── create-rockets.dto.ts
+├── prisma.service.ts
+├── app.module.ts
+└── main.ts
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+## Rocket Model
 
-# watch mode
-$ npm run start:dev
+| Field       | Type    |
+| ----------- | ------- |
+| id          | Integer |
+| name        | String  |
+| status      | String  |
+| launch      | String  |
+| destination | String  |
 
-# production mode
-$ npm run start:prod
+---
+
+## API Endpoints
+
+### Create Rocket
+
+```http
+POST /rockets
 ```
 
-## Run tests
+Request Body:
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```json
+{
+  "name": "Eagle908",
+  "status": "Active",
+  "launch": "2020",
+  "destination": "Mars"
+}
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Get All Rockets
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+```http
+GET /rockets
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+### Get Rocket By ID
 
-Check out a few resources that may come in handy when working with NestJS:
+```http
+GET /rockets/{id}
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Example:
 
-## Support
+```http
+GET /rockets/1
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+### Update Rocket
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```http
+PUT /rockets/{id}
+```
 
-## License
+Request Body:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```json
+{
+  "name": "Eagle909",
+  "status": "Active",
+  "launch": "2021",
+  "destination": "Moon"
+}
+```
+
+---
+
+### Delete Rocket
+
+```http
+DELETE /rockets/{id}
+```
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd spaceexpo-launch-control
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Configure your database connection in the Prisma configuration.
+
+Run database migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+Generate Prisma Client:
+
+```bash
+npx prisma generate
+```
+
+Start the application:
+
+```bash
+npm run start:dev
+```
+
+---
+
+## Swagger Documentation
+
+After starting the application, Swagger UI can be accessed at:
+
+```text
+http://localhost:3000/api
+```
+
+This interface allows users to explore and test all available API endpoints directly from the browser.
+
+---
+
+## Author
+
+Developed as part of the SpaceExpo Launch Control project using NestJS, Prisma, MySQL, and Swagger.
